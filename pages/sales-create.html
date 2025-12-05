@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo bán hàng - WMS</title>
+    <link rel="stylesheet" href="../dist/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../assets/js/sales.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Sidebar Overlay -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden transition-opacity" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-primary-800 text-white z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <!-- Sidebar sẽ được render động bởi sidebar.js -->
+    </aside>
+
+    <!-- Header -->
+    <header class="bg-primary-600 text-white">
+        <div class="flex items-center justify-between px-6 py-4">
+            <button onclick="toggleSidebar()" class="text-white hover:bg-primary-700 p-2 rounded-lg transition-colors">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-user-circle text-xl"></i>
+                    <span>admin</span>
+                </div>
+                <a href="../login.html" class="bg-danger-600 hover:bg-danger-700 px-4 py-2 rounded-lg transition-colors">
+                    Đăng xuất
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-6">
+        <div class="bg-white rounded-lg shadow-lg">
+            <!-- Header -->
+            <div class="bg-primary-600 text-white px-6 py-4 rounded-t-lg flex items-center justify-between">
+                <h2 class="text-xl font-semibold">Tạo mới bán hàng</h2>
+                <button onclick="saveSale()" class="bg-success-600 hover:bg-success-700 px-4 py-2 rounded-lg transition-colors">
+                    Lưu
+                </button>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="px-6 py-4 border-b flex justify-center">
+                <div class="flex items-center justify-between w-full max-w-2xl">
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center font-semibold mb-2">1</div>
+                        <span class="text-sm font-medium text-primary-600">Tạo mới</span>
+                    </div>
+                    <div class="flex-1 h-1 bg-gray-300 mx-4"></div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-semibold mb-2">2</div>
+                        <span class="text-sm font-medium text-gray-500">Duyệt đơn</span>
+                    </div>
+                    <div class="flex-1 h-1 bg-gray-300 mx-4"></div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-semibold mb-2">3</div>
+                        <span class="text-sm font-medium text-gray-500">Hoàn thành</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="p-6 space-y-6">
+                <!-- Thông tin đơn hàng & khách hàng -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-semibold text-gray-800 mb-3">Thông tin đơn hàng</h3>
+                        <label class="inline-flex items-center space-x-2 text-sm text-gray-700">
+                            <input type="checkbox" id="directSale" checked class="text-primary-600">
+                            <span>Đơn bán trực tiếp</span>
+                        </label>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4 space-y-3">
+                        <h3 class="font-semibold text-gray-800">Thông tin khách hàng</h3>
+                        <div class="flex items-center space-x-3">
+                            <input type="text" id="customerName" placeholder="Nhập tên khách hàng"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            <button type="button" class="px-4 py-2 bg-success-600 hover:bg-success-700 text-white rounded-lg transition-colors">
+                                Thêm
+                            </button>
+                        </div>
+                        <input type="text" id="customerPhone" placeholder="Nhập số điện thoại khách hàng"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                </div>
+
+                <!-- Thông tin thanh toán tổng -->
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h3 class="font-semibold text-gray-800 mb-3">Thông tin thanh toán</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Thành tiền</label>
+                                <input type="text" id="totalAmount" readonly value="0"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 text-right">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Giảm giá</label>
+                                <input type="number" id="discountAmount" value="0"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-right"
+                                       placeholder="Nhập số tiền giảm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tổng tiền</label>
+                                <input type="text" id="finalAmount" readonly value="0"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 text-right">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Ghi chú</label>
+                                <input type="text" id="paymentNote" placeholder="Ghi chú thanh toán"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-sm font-semibold text-gray-700">Khách trả tiền</p>
+                            <div class="flex items-center space-x-4">
+                                <label class="inline-flex items-center space-x-2">
+                                    <input type="radio" name="paymentMethod" value="cash" class="text-primary-600" checked>
+                                    <span>Tiền mặt</span>
+                                </label>
+                                <label class="inline-flex items-center space-x-2">
+                                    <input type="radio" name="paymentMethod" value="transfer" class="text-primary-600">
+                                    <span>Chuyển khoản</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thông tin chung thêm mã đơn và mô tả -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Mã đơn bán</label>
+                        <input type="text" id="saleCode" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ngày tạo</label>
+                        <input type="datetime-local" id="createdDate" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Mô tả</label>
+                        <input type="text" id="description" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                </div>
+
+                <!-- Product Information -->
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Thông tin sản phẩm</h3>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nhập mã sản phẩm hoặc tên sản phẩm</label>
+                        <input type="text" id="productSearch" placeholder="Tìm kiếm sản phẩm..." 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-primary-600 text-white">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold">STT</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold">Mã sản phẩm</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold">Tên sản phẩm</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold">Đơn vị tính</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold">Số lượng</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold">Đơn giá</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold">Chiết khấu (%)</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold">Thành tiền</th>
+                                    <th class="px-4 py-3 text-center text-sm font-semibold">#</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productTableBody" class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td colspan="8" class="px-4 py-8 text-center text-gray-500">
+                                        <button onclick="addProductRow()" class="text-primary-600 hover:text-primary-800 font-medium">
+                                            <i class="fas fa-plus mr-2"></i>Thêm sản phẩm
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="mt-4 flex items-center justify-end space-x-3">
+            <button onclick="saveSale()" class="px-5 py-2 bg-success-600 hover:bg-success-700 text-white rounded-lg transition-colors">
+                Thanh toán
+            </button>
+            <button onclick="history.back()" class="px-5 py-2 bg-danger-600 hover:bg-danger-700 text-white rounded-lg transition-colors">
+                Hủy
+            </button>
+        </div>
+    </div>
+</body>
+</html>
+

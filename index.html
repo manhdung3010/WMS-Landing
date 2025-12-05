@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ - WMS</title>
+    <link rel="stylesheet" href="./dist/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/dashboard.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Sidebar Overlay -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden transition-opacity" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-primary-800  text-white z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <!-- Search Bar -->
+        <div class="p-4 border-b border-primary-400">
+            <div class="flex items-center bg-primary-800 border border-white rounded-lg px-3 py-2">
+                <input type="text" placeholder="Search" class="bg-primary-800 text-white placeholder-gray-300 flex-1 outline-none text-sm">
+                <i class="fas fa-search text-white cursor-pointer"></i>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="py-2">
+            <!-- Trang chủ -->
+            <a href="index.html" class="flex items-center justify-between px-4 py-3 bg-primary-700 hover:bg-primary-600 transition-colors">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-home text-lg"></i>
+                    <span>Trang chủ</span>
+                </div>
+                <i class="fas fa-chevron-right text-sm"></i>
+            </a>
+
+            <!-- Sản phẩm -->
+            <a href="pages/products.html" class="flex items-center justify-between px-4 py-3 hover:bg-primary-600 transition-colors">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-cube text-lg"></i>
+                    <span>Sản phẩm</span>
+                </div>
+                <i class="fas fa-chevron-right text-sm"></i>
+            </a>
+
+            <!-- Phiếu nhập -->
+            <a href="pages/import-notes.html" class="flex items-center justify-between px-4 py-3 hover:bg-primary-600 transition-colors">
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <i class="fas fa-file-alt text-lg"></i>
+                        <i class="fas fa-arrow-down text-xs absolute -top-1 -right-1"></i>
+                    </div>
+                    <span>Phiếu nhập</span>
+                </div>
+                <i class="fas fa-chevron-right text-sm"></i>
+            </a>
+
+            <!-- Phiếu xuất -->
+            <a href="pages/export-notes.html" class="flex items-center justify-between px-4 py-3 hover:bg-primary-600 transition-colors">
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <i class="fas fa-file-alt text-lg"></i>
+                        <i class="fas fa-arrow-up text-xs absolute -top-1 -right-1"></i>
+                    </div>
+                    <span>Phiếu xuất</span>
+                </div>
+                <i class="fas fa-chevron-right text-sm"></i>
+            </a>
+
+            <!-- Kiểm kê -->
+            <a href="pages/inventory-check.html" class="flex items-center justify-between px-4 py-3 hover:bg-primary-600 transition-colors">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-clipboard-check text-lg"></i>
+                    <span>Kiểm kê</span>
+                </div>
+                <i class="fas fa-chevron-right text-sm"></i>
+            </a>
+
+            <!-- Phiếu hủy -->
+            <a href="pages/cancel-notes.html" class="flex items-center justify-between px-4 py-3 hover:bg-primary-600 transition-colors">
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <i class="fas fa-file-alt text-lg"></i>
+                        <i class="fas fa-times text-xs absolute -top-1 -right-1"></i>
+                    </div>
+                    <span>Phiếu hủy</span>
+                </div>
+                <i class="fas fa-chevron-right text-sm"></i>
+            </a>
+
+            <!-- Bán hàng -->
+            <a href="pages/sales.html" class="flex items-center justify-between px-4 py-3 hover:bg-primary-600 transition-colors">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-truck text-lg"></i>
+                    <span>Bán hàng</span>
+                </div>
+                <i class="fas fa-chevron-right text-sm"></i>
+            </a>
+
+            <!-- Báo cáo hàng tồn -->
+            <a href="pages/inventory-report.html" class="flex items-center justify-between px-4 py-3 hover:bg-primary-600 transition-colors">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-boxes text-lg"></i>
+                    <span>Báo cáo hàng tồn</span>
+                </div>
+                <i class="fas fa-chevron-right text-sm"></i>
+            </a>
+
+            <!-- Thống kê doanh thu -->
+            <a href="pages/revenue-statistics.html" class="flex items-center justify-between px-4 py-3 hover:bg-primary-600 transition-colors">
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <i class="fas fa-boxes text-lg"></i>
+                        <i class="fas fa-arrow-trend-up text-xs absolute -top-1 -right-1"></i>
+                    </div>
+                    <span>Thống kê doanh thu</span>
+                </div>
+                <i class="fas fa-chevron-right text-sm"></i>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Header -->
+    <header class="bg-primary-600 text-white">
+        <div class="flex items-center justify-between px-6 py-4">
+            <button onclick="toggleSidebar()" class="text-white hover:bg-primary-700 p-2 rounded-lg transition-colors">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-user-circle text-xl"></i>
+                    <span>admin</span>
+                </div>
+                <a href="login.html" class="bg-danger-600 hover:bg-danger-700 px-4 py-2 rounded-lg transition-colors">
+                    Đăng xuất
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex flex-col lg:flex-row">
+        <!-- Left Section - Function Grid -->
+        <div class="w-full lg:w-1/2 p-4 md:p-6 lg:p-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 h-full">
+                <!-- Sản phẩm -->
+                <a href="pages/products.html" class="bg-primary-600 text-white rounded-lg p-4 md:p-6 lg:p-8 shadow-lg hover:bg-primary-700 transition-colors cursor-pointer relative flex flex-col items-center justify-center min-h-[120px] md:min-h-[140px]">
+                    <div class="text-center">
+                        <i class="fas fa-cube text-3xl md:text-4xl lg:text-5xl mb-2 md:mb-3"></i>
+                        <p class="font-semibold text-sm md:text-base">Sản phẩm</p>
+                    </div>
+                </a>
+
+                <!-- Phiếu nhập -->
+                <a href="pages/import-notes.html" class="bg-primary-600 text-white rounded-lg p-4 md:p-6 lg:p-8 shadow-lg hover:bg-primary-700 transition-colors cursor-pointer relative flex flex-col items-center justify-center min-h-[120px] md:min-h-[140px]">
+                    <div class="text-center">
+                        <div class="relative inline-block mb-2 md:mb-3">
+                            <i class="fas fa-file-alt text-3xl md:text-4xl lg:text-5xl"></i>
+                            <i class="fas fa-arrow-down text-base md:text-lg absolute -top-1 -right-2 bg-primary-700 rounded-full p-1"></i>
+                        </div>
+                        <p class="font-semibold text-sm md:text-base">Phiếu nhập</p>
+                    </div>
+                </a>
+
+                <!-- Phiếu xuất -->
+                <a href="pages/export-notes.html" class="bg-primary-600 text-white rounded-lg p-4 md:p-6 lg:p-8 shadow-lg hover:bg-primary-700 transition-colors cursor-pointer relative flex flex-col items-center justify-center min-h-[120px] md:min-h-[140px]">
+                    <div class="text-center">
+                        <div class="relative inline-block mb-2 md:mb-3">
+                            <i class="fas fa-file-alt text-3xl md:text-4xl lg:text-5xl"></i>
+                            <i class="fas fa-arrow-up text-base md:text-lg absolute -top-1 -right-2 bg-primary-700 rounded-full p-1"></i>
+                        </div>
+                        <p class="font-semibold text-sm md:text-base">Phiếu xuất</p>
+                    </div>
+                </a>
+
+                <!-- Kiểm kê -->
+                <a href="pages/inventory-check.html" class="bg-primary-600 text-white rounded-lg p-4 md:p-6 lg:p-8 shadow-lg hover:bg-primary-700 transition-colors cursor-pointer relative flex flex-col items-center justify-center min-h-[120px] md:min-h-[140px]">
+                    <div class="text-center">
+                        <i class="fas fa-clipboard-check text-3xl md:text-4xl lg:text-5xl mb-2 md:mb-3"></i>
+                        <p class="font-semibold text-sm md:text-base">Kiểm kê</p>
+                    </div>
+                </a>
+
+                <!-- Phiếu hủy -->
+                <a href="pages/cancel-notes.html" class="bg-primary-600 text-white rounded-lg p-4 md:p-6 lg:p-8 shadow-lg hover:bg-primary-700 transition-colors cursor-pointer relative flex flex-col items-center justify-center min-h-[120px] md:min-h-[140px]">
+                    <div class="text-center">
+                        <div class="relative inline-block mb-2 md:mb-3">
+                            <i class="fas fa-file-alt text-3xl md:text-4xl lg:text-5xl"></i>
+                            <i class="fas fa-trash text-base md:text-lg absolute -top-1 -right-2 bg-primary-700 rounded-full p-1"></i>
+                        </div>
+                        <p class="font-semibold text-sm md:text-base">Phiếu hủy</p>
+                    </div>
+                </a>
+
+                <!-- Bán hàng -->
+                <a href="pages/sales.html" class="bg-primary-600 text-white rounded-lg p-4 md:p-6 lg:p-8 shadow-lg hover:bg-primary-700 transition-colors cursor-pointer relative flex flex-col items-center justify-center min-h-[120px] md:min-h-[140px]">
+                    <div class="text-center">
+                        <i class="fas fa-truck text-3xl md:text-4xl lg:text-5xl mb-2 md:mb-3"></i>
+                        <p class="font-semibold text-sm md:text-base">Bán hàng</p>
+                    </div>
+                </a>
+
+                <!-- Báo cáo hàng tồn -->
+                <a href="pages/inventory-report.html" class="bg-primary-600 text-white rounded-lg p-4 md:p-6 lg:p-8 shadow-lg hover:bg-primary-700 transition-colors cursor-pointer relative flex flex-col items-center justify-center min-h-[120px] md:min-h-[140px]">
+                    <div class="text-center">
+                        <i class="fas fa-boxes text-3xl md:text-4xl lg:text-5xl mb-2 md:mb-3"></i>
+                        <p class="font-semibold text-sm md:text-base">Báo cáo hàng tồn</p>
+                    </div>
+                </a>
+
+                <!-- Thống kê doanh thu -->
+                <a href="pages/revenue-statistics.html" class="bg-primary-600 text-white rounded-lg p-4 md:p-6 lg:p-8 shadow-lg hover:bg-primary-700 transition-colors cursor-pointer relative flex flex-col items-center justify-center min-h-[120px] md:min-h-[140px]">
+                    <div class="text-center">
+                        <div class="relative inline-block mb-2 md:mb-3">
+                            <i class="fas fa-boxes text-3xl md:text-4xl lg:text-5xl"></i>
+                            <i class="fas fa-arrow-trend-up text-base md:text-lg absolute -top-1 -right-2 bg-primary-700 rounded-full p-1"></i>
+                        </div>
+                        <p class="font-semibold text-sm md:text-base">Thống kê doanh thu</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Section - Rules Panel -->
+        <div class="w-full lg:w-1/2">
+            <div class="bg-white border-l-0 lg:border-l-4 border-t-4 lg:border-t-0 border-primary-400 rounded-lg shadow-lg m-4 md:m-6 lg:m-8 p-4 md:p-6">
+                <h3 class="text-lg md:text-xl font-semibold text-primary-600 mb-4 text-center">Bảng quy tắc nhân viên</h3>
+                
+                <div class="space-y-3 md:space-y-4 mb-4 md:mb-6">
+                    <div>
+                        <p class="font-semibold text-gray-800 mb-2 text-sm md:text-base">Quy tắc 1:</p>
+                        <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                            Mọi hoạt động nhập kho - xuất kho - điều chuyển - kiểm kê phải được ghi lại ngay lập tức trên hệ thống. Tuyệt đối không ghi nhớ tạm thời hoặc ghi ra giấy để cập nhật sau.
+                        </p>
+                    </div>
+    
+                    <div>
+                        <p class="font-semibold text-gray-800 mb-2 text-sm md:text-base">Quy tắc 2:</p>
+                        <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                            Nhân viên kho phải kiểm tra số lượng, tình trạng, mã hàng, hạn sử dụng (nếu có) trước khi hoàn tất bất kỳ nghiệp vụ nào.
+                        </p>
+                    </div>
+    
+                    <div>
+                        <p class="font-semibold text-gray-800 mb-2 text-sm md:text-base">Quy tắc 3:</p>
+                        <p class="text-xs md:text-sm text-gray-700 leading-relaxed mb-2">
+                            Trong quá trình làm việc, nhân viên phải thực hiện đúng các bước quy trình đã quy định:
+                        </p>
+                        <ul class="list-disc list-inside text-xs md:text-sm text-gray-700 space-y-1 ml-4">
+                            <li>Chọn đúng chức năng trên hệ thống</li>
+                            <li>Nhập liệu đầy đủ, đúng biểu mẫu</li>
+                            <li>Kiểm tra lại kỹ thông tin trước khi lưu</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="border-t pt-3 md:pt-4">
+                    <p class="font-semibold text-primary-600 mb-2 md:mb-3 text-sm md:text-base">Liên hệ khẩn cấp:</p>
+                    <div class="space-y-1 md:space-y-2 text-xs md:text-sm text-gray-700">
+                        <p>Quản lý kho: Ông/Bà... (09xx.xxx.xxx)</p>
+                        <p>Phòng kế toán: Bà... (09xxxxxxx)</p>
+                        <p>Hỗ trợ kỹ thuật: 090...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

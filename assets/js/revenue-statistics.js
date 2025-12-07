@@ -21,7 +21,7 @@ function renderRevenueChart() {
             {
                 label: 'Thép A125',
                 data: [120, 150, 110, 140],
-                backgroundColor: '#2563eb',
+                backgroundColor: '#1A7DD9',
                 borderRadius: 6,
                 maxBarThickness: 45,
                 categoryPercentage: 0.45,
@@ -31,7 +31,7 @@ function renderRevenueChart() {
             {
                 label: 'Trụ sắt A541',
                 data: [100, 90, 145, 115],
-                backgroundColor: '#fbbf24',
+                backgroundColor: '#00D9FF',
                 borderRadius: 6,
                 maxBarThickness: 45,
                 categoryPercentage: 0.45,
@@ -40,7 +40,7 @@ function renderRevenueChart() {
             {
                 label: 'Ống thép phi 25',
                 data: [80, 95, 105, 125],
-                backgroundColor: '#22c55e',
+                backgroundColor: '#FFC300',
                 borderRadius: 6,
                 maxBarThickness: 45,
                 categoryPercentage: 0.45,

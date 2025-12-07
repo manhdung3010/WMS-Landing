@@ -114,11 +114,15 @@ function addProductRow() {
                 <input type="number" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-500" placeholder="Số lượng" onchange="calculateTotal(this)">
             </td>
             <td class="px-4 py-3 text-sm">
-                <input type="number" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-500" placeholder="Đơn giá" onchange="calculateTotal(this)">
+                <input type="number" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-500" placeholder="Số lượng thực tế" onchange="calculateTotal(this)">
             </td>
             <td class="px-4 py-3 text-sm">
-                <input type="text" class="w-full px-2 py-1 border border-gray-300 rounded bg-gray-100" placeholder="Thành tiền" readonly>
+                <input type="number" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-500" placeholder="Số lượng thiếu" onchange="calculateTotal(this)">
             </td>
+            <td class="px-4 py-3 text-sm">
+                <input type="number" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-500" placeholder="Số lượng thừa" onchange="calculateTotal(this)">
+            </td>
+        
             <td class="px-4 py-3 text-sm">
                 <button onclick="removeProductRow(this)" class="text-danger-600 hover:text-danger-800">
                     <i class="fas fa-trash"></i>

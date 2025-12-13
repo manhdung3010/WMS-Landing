@@ -15,31 +15,43 @@ function renderRevenueChart() {
     if (!ctx || typeof Chart === 'undefined') return;
 
     const labels = ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4'];
+    // Dữ liệu số sản phẩm đã bán (để hiển thị trong tooltip)
+    const productData = {
+        'Thép A125': [120, 150, 110, 140],
+        'Trụ sắt A541': [100, 90, 145, 115],
+        'Ống thép phi 25': [80, 95, 105, 125]
+    };
+    
+    // Giá mỗi sản phẩm (để tính doanh thu)
+    const productPrices = {
+        'Thép A125': 50000,
+        'Trụ sắt A541': 45000,
+        'Ống thép phi 25': 40000
+    };
+
     const data = {
         labels,
         datasets: [
             {
                 label: 'Thép A125',
-                data: [120, 150, 110, 140],
+                // Chuyển số sản phẩm thành số tiền (sản phẩm * giá)
+                data: productData['Thép A125'].map(qty => qty * productPrices['Thép A125']),
                 backgroundColor: '#1A7DD9',
                 borderRadius: 6,
                 maxBarThickness: 45,
                 categoryPercentage: 0.45,
-
             },
-         
             {
                 label: 'Trụ sắt A541',
-                data: [100, 90, 145, 115],
+                data: productData['Trụ sắt A541'].map(qty => qty * productPrices['Trụ sắt A541']),
                 backgroundColor: '#00D9FF',
                 borderRadius: 6,
                 maxBarThickness: 45,
                 categoryPercentage: 0.45,
-
             },
             {
                 label: 'Ống thép phi 25',
-                data: [80, 95, 105, 125],
+                data: productData['Ống thép phi 25'].map(qty => qty * productPrices['Ống thép phi 25']),
                 backgroundColor: '#FFC300',
                 borderRadius: 6,
                 maxBarThickness: 45,
@@ -56,7 +68,16 @@ function renderRevenueChart() {
             maintainAspectRatio: false,
             plugins: {
                 legend: { position: 'top' },
-                tooltip: { callbacks: { label: context => `${context.dataset.label}: ${context.raw}` } }
+                tooltip: { 
+                    callbacks: { 
+                        label: function(context) {
+                            const datasetLabel = context.dataset.label;
+                            const dataIndex = context.dataIndex;
+                            const productQty = productData[datasetLabel][dataIndex];
+                            return `${datasetLabel}: ${productQty} sản phẩm`;
+                        }
+                    } 
+                }
             },
             scales: {
                 x: { 
@@ -68,7 +89,9 @@ function renderRevenueChart() {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        callback: value => value.toLocaleString('vi-VN')
+                        callback: function(value) {
+                            return value.toLocaleString('vi-VN') + ' đ';
+                        }
                     }
                 }
             }
